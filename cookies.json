@@ -1,0 +1,225 @@
+[
+  {
+    "domain": "www.dogcatstar.com",
+    "httpOnly": false,
+    "name": "country_code",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "TW"
+  },
+  {
+    "domain": "www.dogcatstar.com",
+    "httpOnly": false,
+    "name": "account",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "+886936727490"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1766321598,
+    "httpOnly": false,
+    "name": "_clsk",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "1akygvg%5E1766235198484%5E1%5E1%5Ez.clarity.ms%2Fcollect"
+  },
+  {
+    "domain": "www.dogcatstar.com",
+    "expiry": 1766840077,
+    "httpOnly": false,
+    "name": "AWSALBCORS",
+    "path": "/",
+    "sameSite": "None",
+    "secure": true,
+    "value": "ApA6Sz7grnNPYjcZu7UC4aY8aSDODMKG1FK2z6b/3Yc8j3BkT1bnVnUfdhbwXslywuL06J0zrfvQemUZXuR4zCdMUVMu70N1aFtkYhMcSqkv9wwdVDFaS3BNhO5e"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1774011167,
+    "httpOnly": false,
+    "name": "_gcl_au",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "1.1.2064561663.1766235167"
+  },
+  {
+    "domain": "www.dogcatstar.com",
+    "httpOnly": false,
+    "name": "x-platform-token",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3cCIsImlhdCI6MTc2NjIzNTIzMywibmJmIjoxNzY2MjM1MjMzLCJleHAiOjE3NjYyMzg4MzMsInRyYWNraW5nSWQiOiI5NTkzZmQzYi01ZmQzLTQ0MzMtYmVhNS00NzA5ZDQyZjViMGMiLCJhdWQiOiJjb3NpZ24iLCJzdWIiOjg3NDQ2MzUwMiwicGxhdGZvcm1JZCI6NCwidHlwZSI6ImNsaWVudC10b2tlbiJ9.gl_tvEts6n81H-kCaoBl0i-Ju5EDOu8Wu9utBmTrcsg"
+  },
+  {
+    "domain": "www.dogcatstar.com",
+    "expiry": 1766236960,
+    "httpOnly": false,
+    "name": "__ocssid",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "d8gpep4n-mjeat7o5.1766235160041.1766235160041"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1797771181,
+    "httpOnly": false,
+    "name": "_clck",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "r3f12h%5E2%5Eg20%5E0%5E2180"
+  },
+  {
+    "domain": "www.dogcatstar.com",
+    "expiry": 1800795159,
+    "httpOnly": false,
+    "name": "ec-pixel-config",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "JTdCJTIyc2hvcElkJTIyJTNBbnVsbCUyQyUyMnNob3BQbGF0Zm9ybSUyMiUzQSUyMkN1c3RvbSUyMiUyQyUyMnRlYW0lMjIlM0ElMjIlRTYlQjElQUElRTUlOTYlQjUlRTYlOTglOUYlRTclOTAlODMlMjIlMkMlMjJlY2lkJTIyJTNBJTIyM2E3ZjlhODAtNzdjZi00MTJmLWI5MDktMWU5YTNlZDVlZmJmJTIyJTJDJTIyZW5hYmxlUGl4ZWwlMjIlM0F0cnVlJTJDJTIydHhMaW5rVHJhY2tpbmdMaWZldGltZSUyMiUzQTMwJTdE"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1800795254,
+    "httpOnly": false,
+    "name": "_ga_CDQ4YCRTZF",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "GS2.1.s1766235146$o1$g1$t1766235254$j46$l0$h679055478"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "httpOnly": false,
+    "name": "sbjs_current_add",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "fd%3D2025-12-20%2012%3A52%3A10%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.dogcatstar.com%2Fmy-account%2F%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.dogcatstar.com%2F"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1774011276,
+    "httpOnly": false,
+    "name": "_fbp",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "fb.1.1766235157942.547823866439656196"
+  },
+  {
+    "domain": "www.dogcatstar.com",
+    "expiry": 1766840077,
+    "httpOnly": false,
+    "name": "AWSALB",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "ApA6Sz7grnNPYjcZu7UC4aY8aSDODMKG1FK2z6b/3Yc8j3BkT1bnVnUfdhbwXslywuL06J0zrfvQemUZXuR4zCdMUVMu70N1aFtkYhMcSqkv9wwdVDFaS3BNhO5e"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "httpOnly": false,
+    "name": "sbjs_migrations",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "1418474375998%3D1"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1800795151,
+    "httpOnly": false,
+    "name": "_ga_QSFB6Z377J",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "GS2.1.s1766235150$o1$g0$t1766235150$j60$l0$h0"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1800795151,
+    "httpOnly": false,
+    "name": "_ga",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "GA1.1.1984926069.1766235147"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "httpOnly": false,
+    "name": "sbjs_first",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "typ%3Dtypein%7C%7C%7Csrc%3D%28direct%29%7C%7C%7Cmdm%3D%28none%29%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29"
+  },
+  {
+    "domain": "www.dogcatstar.com",
+    "expiry": 1800795159,
+    "httpOnly": false,
+    "name": "ec-token",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc0Fub255bW91cyI6InRydWUiLCJyb2xlIjowLCJ0Ijoi5rGq5Za15pif55CDIiwiZCI6Imt0NkN5NnBoNUw2dWRLY1lDRVhSbm5KaytIZkVDdCtPRG1zMURjQlNFb2M9IiwiZSI6Imt0NkN5NnBoNUw2dWRLY1lDRVhSbnYxTStZL2ZWWHVwOFRkSkNDeTJyNWpDTE9hT2lYYWhJTXhWcXNlaWd4RHFNdytTNExrMkhBbWtjV2NHWTZCMHJnPT0iLCJpc0FkbWluIjoiZmFsc2UiLCJpc0NoYW5uZWxSZXN0cmljdGVkIjpmYWxzZSwic3NvIjoiZmFsc2UifQ.HgkXOx5rYhc7R1xCCjbw4vPV9nxlg3ELtq3wX4nacHk"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1781787130,
+    "httpOnly": false,
+    "name": "sbjs_current",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "typ%3Dtypein%7C%7C%7Csrc%3D%28direct%29%7C%7C%7Cmdm%3D%28none%29%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29"
+  },
+  {
+    "domain": "www.dogcatstar.com",
+    "expiry": 1797771125,
+    "httpOnly": false,
+    "name": "cosign-tracking-id",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "9593fd3b-5fd3-4433-bea5-4709d42f5b0c"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "httpOnly": false,
+    "name": "sbjs_first_add",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "fd%3D2025-12-20%2012%3A52%3A10%7C%7C%7Cep%3Dhttps%3A%2F%2Fwww.dogcatstar.com%2Fmy-account%2F%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.dogcatstar.com%2F"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1766236930,
+    "httpOnly": false,
+    "name": "sbjs_session",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "pgs%3D2%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fwww.dogcatstar.com%2Fmy-account%2F"
+  },
+  {
+    "domain": ".dogcatstar.com",
+    "expiry": 1781787130,
+    "httpOnly": false,
+    "name": "sbjs_udata",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "vst%3D1%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Macintosh%3B%20Intel%20Mac%20OS%20X%2010_15_7%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F143.0.0.0%20Safari%2F537.36"
+  }
+]

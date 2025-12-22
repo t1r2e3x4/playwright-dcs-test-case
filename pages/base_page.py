@@ -9,6 +9,7 @@ class BasePage:
         self.page = page
         self.base_url = base_url
         self.path = ""
+        super().__init__(*args, **kwargs)
 
     def goto_path(self, path: str):
         return self.page.goto(urljoin(self.base_url, path))

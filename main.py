@@ -1,5 +1,6 @@
 from src.dog_cat_star import DogCatStar
 from pages.login_page import LoginPage
+from pages.dog_product_page import DogProductPage
 import time
 import json
 import os
@@ -11,8 +12,17 @@ if __name__ == "__main__":
     dcs = DogCatStar()
     dcs.open_homepage()
     # time.sleep(150)
-    login_page = LoginPage(dcs._page)
-    login_page.email_login(os.getenv("EMAIL_IMAP_USERNAME"))
+    # login_page = LoginPage(dcs._page)
+    # login_page.email_login(os.getenv("EMAIL_IMAP_USERNAME"))
+
+    dog_product_page = DogProductPage(dcs._page)
+    dog_product_page.goto()
+
+    dog_product_page.product_add_to_cart_btn("迪士尼貓狗系列 WIDEN寬寬防漏碗").click()
+    d_option_test = dog_product_page.options_in_option_div("款式")
+    print(d_option_test.count())
+    print(d_option_test.all_inner_texts())
+    breakpoint()
     
     # dcs.driver.get("https://www.dogcatstar.com/my-account/")
     # time.sleep(150)

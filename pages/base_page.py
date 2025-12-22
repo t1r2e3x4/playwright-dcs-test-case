@@ -20,3 +20,9 @@ class BasePage:
     @property
     def is_in_current_page(self):
         return self.path in self.page.url
+    
+    def goto(self):
+        if not self.is_in_current_page:
+            self.goto_path(self.path)
+        else:
+            return

@@ -30,7 +30,7 @@ class DogCatStar:
         )
         self._context = self._browser.new_context(
             ignore_https_errors=True,
-            user_agent=user_agent,
+            # user_agent=user_agent,
             locale=_lang,
             viewport={"width": 1920, "height": 1080},
         )
@@ -49,7 +49,7 @@ class DogCatStar:
             self._browser = None
 
         if self._playwright:
-            self._playwright.close()
+            self._playwright.stop()
             self._playwright = None
 
         return False

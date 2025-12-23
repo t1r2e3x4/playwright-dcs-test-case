@@ -14,7 +14,6 @@ class DogCatStar:
         self.base_url = base_url
 
         _lang = os.getenv('DOGCATSTAR_LANG', 'zh-tw')
-        # Start Playwright in sync mode and create browser/context/page
         self._playwright = sync_playwright().start()
 
         # Default to Chromium for 'chrome' option
@@ -23,10 +22,8 @@ class DogCatStar:
         else:
             bw = self._playwright.firefox
 
-        # Launch browser. We keep headful (not headless) by default to match prior behavior.
         self._browser = bw.launch(headless=False, args=["--disable-blink-features=AutomationControlled", "--ignore-certificate-errors", "--start-maximized"]) 
 
-        # Create a context with some common options (user agent, locale, ignore https errors)
         user_agent = (
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -60,4 +57,4 @@ class DogCatStar:
     def open_homepage(self):
         logger.info(f"Opening homepage at {self.base_url}")
         index_page = IndexPage(self._page)
-        return index_page.go_to_index()
+        return index_page.goto()

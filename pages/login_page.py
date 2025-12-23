@@ -11,7 +11,7 @@ class LoginPage(BasePage):
             "button:text('使用 Facebook 帳號登入')"
         )
         self.google_btn: Locator = self.page.locator("button:text('使用 Google 帳號登入')")
-        self.email_btn: Locator = self.page.locator("button:text('使用 Email 登入')")
+        self.email_btn: Locator = self.page.locator("button:text('使用 Email 登入'), button:text('使用 電子信箱 登入')")
         self.phone_national_code_dropdown: Locator = self.page.locator(
             "div.MuiBox-root > div.MuiFormControl-root"
         )
@@ -19,8 +19,8 @@ class LoginPage(BasePage):
         self.ask_login_div: Locator = self.page.locator("div:has(h6:has-text('登入享優惠')):has(button:text('立即登入'))")
         
         # email login process locators
-        self.email_login_container: Locator = self.page.locator("div:has(div>h4:text('使用 Email 登入'))")
-        self.email_banner: Locator = self.email_login_container.locator("p:text('Email')")
+        self.email_login_container: Locator = self.page.locator("div:has(div>h4:text('使用 Email 登入')), div:has(div>h4:text('使用 電子信箱 登入'))")
+        self.email_banner: Locator = self.email_login_container.locator("p:text('Email'), p:text('電子信箱')")
         self.email_input: Locator = self.email_login_container.locator('input[name="email"]')
         self.email_submit_btn: Locator = self.email_login_container.locator("button:text('確認')")
         

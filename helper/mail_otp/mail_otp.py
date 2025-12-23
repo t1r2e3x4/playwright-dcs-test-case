@@ -21,19 +21,19 @@ def get_latest_otp_email(subject_to_search:str):
     mail.select("inbox")
     mail._encoding = "utf-8"
 
-    status, data = mail.search("UTF-8", f'(SUBJECT "{subject_to_search}")')
+    status, data = mail.search("UTF-8", f'(UNSEEN SUBJECT "{subject_to_search}")')
 
     if status != "OK":
         logger.warning("search failed")
         mail.logout()
-        exit()
+        return None
 
     email_ids = data[0].split()
 
     if not email_ids:
         logger.warning("cannot find any email with the specified subject")
         mail.logout()
-        exit()
+        return None
 
     latest_email_id = email_ids[-1]
     status, msg_data = mail.fetch(latest_email_id, "(RFC822)")
@@ -41,7 +41,7 @@ def get_latest_otp_email(subject_to_search:str):
     if status != "OK":
         logger.warning("fetch email failed")
         mail.logout()
-        exit()
+        return None
 
     raw_email = msg_data[0][1]
     msg = email.message_from_bytes(raw_email)

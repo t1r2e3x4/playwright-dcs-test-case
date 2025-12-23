@@ -1,3 +1,4 @@
+import re
 from playwright.sync_api import Locator, Page, expect
 
 class ProductPageMixin:
@@ -10,7 +11,23 @@ class ProductPageMixin:
     @property
     def dialog_add_to_cart_button(self) -> Locator:
         return self.product_dialog_div.locator("button:text('加入購物車')")
-        
+    
+    @property
+    def pagination_div(self) -> Locator:
+        return self.page.locator("div > nav.woocommerce-pagination")
+    
+    @property
+    def pagination_next_btn(self) -> Locator:
+        return self.pagination_div.locator("a.next.page-number")
+    
+    @property
+    def pagination_prev_btn(self) -> Locator:
+        return self.pagination_div.locator("a.prev.page-number")
+
+    @property
+    def product_containers(self) -> Locator:
+        return self.page.locator("div.product-small")
+    
     def product_container(self, product_name:str) -> Locator:
         return self.page.locator(f"div.product-small:has(a:text('{product_name}'))")
     
@@ -30,4 +47,4 @@ class ProductPageMixin:
         return option_div.locator("div > button")
 
     def option_btn(self, option_category:str, option_name:str) -> Locator:
-        return self.options_in_option_div(option_category).filter(f'text("{option_name}")')
+        return self.options_in_option_div(option_category).locator(f"p:text('{option_name}')").locator("..")

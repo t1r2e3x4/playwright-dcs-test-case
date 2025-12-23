@@ -24,12 +24,6 @@ class LoginPage(BasePage):
         self.email_input: Locator = self.email_login_container.locator('input[name="email"]')
         self.email_submit_btn: Locator = self.email_login_container.locator("button:has-text('確認')")
         
-    def go_to_login(self):
-        if not self.is_in_current_page:
-            self.goto_path(self.path)
-        else:
-            return
-        
     def click_email_login(self):
         self.email_btn.click()
         

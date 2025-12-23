@@ -15,7 +15,7 @@ EMAIL_PASSWORD = os.getenv("EMAIL_IMAP_PASSWORD")
 logger = logging.getLogger(__name__)
 
 def get_latest_otp_email(subject_to_search:str):
-    print(IMAP_SERVER, EMAIL_ACCOUNT, EMAIL_PASSWORD)
+    logger.debug(IMAP_SERVER, EMAIL_ACCOUNT, EMAIL_PASSWORD)
     mail = imaplib.IMAP4_SSL(IMAP_SERVER)
     mail.login(EMAIL_ACCOUNT, EMAIL_PASSWORD)
     mail.select("inbox")

@@ -5,17 +5,16 @@ import time
 import logging
 
 logger = logging.getLogger(__name__)
+
+
 class ProductPageHelper(BasePage, ProductPageMixin):
 
     def add_product_to_cart_with_options(
-        self,
-        product_name: str,
-        options: dict[str, str] = None,
-        max_pages: int = 5
+        self, product_name: str, options: dict[str, str] = None, max_pages: int = 5
     ) -> bool:
         """
         從分頁找到商品，點擊加入購物車，選擇規格與口味，最後確認加入購物車。
-        
+
         :param product_name: 商品名稱
         :param options: 選項字典，例如 {"選擇規格": "大包", "口味": "雞肉"}
         :param max_pages: 最多翻頁數
@@ -26,13 +25,13 @@ class ProductPageHelper(BasePage, ProductPageMixin):
             self.product_containers.first.wait_for(state="visible", timeout=5000)
             # 嘗試在當前頁面找到商品
             product_locator = self.product_container(product_name)
-            
+
             if product_locator.count() > 0:
                 # 點擊商品加入購物車按鈕
                 add_btn = self.product_add_to_cart_btn(product_name)
                 expect(add_btn).to_be_visible()
                 expect(add_btn).to_be_enabled()
-                
+
                 # TODO: 有時候按太快會沒反應，暫時用 wait_for_load_state 解決，感覺是在等 API 回應？
                 self.page.wait_for_load_state("load")
                 add_btn.click()
@@ -54,7 +53,7 @@ class ProductPageHelper(BasePage, ProductPageMixin):
                         except:
                             logger.error(f"無法選擇選項 {category} 的 {option_name}")
                             return False
-                        
+
                 # 最後點擊對話框加入購物車
                 expect(self.dialog_add_to_cart_button).to_be_visible()
                 expect(self.dialog_add_to_cart_button).to_be_enabled()

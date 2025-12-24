@@ -14,7 +14,8 @@ EMAIL_PASSWORD = os.getenv("EMAIL_IMAP_PASSWORD")
 
 logger = logging.getLogger(__name__)
 
-def get_latest_otp_email(subject_to_search:str):
+
+def get_latest_otp_email(subject_to_search: str):
     logger.debug(IMAP_SERVER, EMAIL_ACCOUNT, EMAIL_PASSWORD)
     mail = imaplib.IMAP4_SSL(IMAP_SERVER)
     mail.login(EMAIL_ACCOUNT, EMAIL_PASSWORD)
@@ -61,7 +62,7 @@ def get_latest_otp_email(subject_to_search:str):
             if content_type == "text/plain" and "attachment" not in content_disposition:
                 charset = part.get_content_charset() or "utf-8"
                 body += part.get_payload(decode=True).decode(charset, errors="ignore")
-                break  
+                break
     else:
         charset = msg.get_content_charset() or "utf-8"
         body = msg.get_payload(decode=True).decode(charset, errors="ignore")
@@ -71,5 +72,5 @@ def get_latest_otp_email(subject_to_search:str):
     mail.logout()
 
     # TODO: 根據實際 OTP 格式調整正則表達式，目前只是假設 OTP 是 6 位數字
-    otp_pass = re.findall(r'<div style=".*">(\d{6})</div>',body)
+    otp_pass = re.findall(r'<div style=".*">(\d{6})</div>', body)
     return otp_pass[0] if otp_pass else None

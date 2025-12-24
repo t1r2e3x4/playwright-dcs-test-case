@@ -22,7 +22,7 @@ class DogCatStar:
         else:
             bw = self._playwright.firefox
 
-        self._browser = bw.launch(headless=False, args=["--disable-blink-features=AutomationControlled", "--ignore-certificate-errors", "--start-maximized"]) 
+        self._browser = bw.launch(headless=False, args=["--disable-blink-features=AutomationControlled", "--ignore-certificate-errors"]) 
 
         user_agent = (
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "

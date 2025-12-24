@@ -15,7 +15,7 @@ def dog_cat_star():
 
 
 @pytest.fixture(scope="function")
-def page(dog_cat_star):
+def page(dog_cat_star: DogCatStar):
     """
     每個 test function 都提供一個乾淨 page
     """
@@ -26,7 +26,7 @@ def page(dog_cat_star):
 
 
 @pytest.fixture(scope="function")
-def logged_in_page(dog_cat_star):
+def logged_in_page(dog_cat_star: DogCatStar):
     """
     每個 test 用 storage_state 建立已登入 page
     """

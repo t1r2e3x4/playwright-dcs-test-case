@@ -25,7 +25,7 @@ class LoginPage(BasePage):
         self.email_submit_btn: Locator = self.email_login_container.locator("button:text('確認')")
         
         # otp password login process locators
-        self.otp_password_input: Locator = self.page.locator('form > input[autocomplete="one-time-code"][data-gtm-form-interact-field-id=0]')
+        self.otp_password_input: Locator = self.page.locator('form > input[autocomplete="one-time-code"]').first
         
     def click_email_login(self):
         expect(self.email_btn).to_be_visible()
@@ -47,8 +47,10 @@ class LoginPage(BasePage):
     def enter_otp_password(self, otp_password:str):
         self.otp_password_input.wait_for()
         self.otp_password_input.fill(otp_password)
+        # TODO: wait for login to complete, use proper wait method
+        
+        self.page.wait_for_load_state("load")
         expect(self.ask_login_div).not_to_be_visible()
-        breakpoint()
         
     
         

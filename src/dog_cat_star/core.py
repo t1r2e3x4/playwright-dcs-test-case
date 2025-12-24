@@ -32,9 +32,9 @@ class DogCatStar:
             ignore_https_errors=True,
             # user_agent=user_agent,
             locale=_lang,
-            viewport={"width": 1920, "height": 1080},
+            # viewport={"width": 1920, "height": 1080},
         )
-        self._page = self._context.new_page()
+        # self._page = self._context.new_page()
 
     def close(self):
         self.__exit__(None, None, None)
@@ -56,5 +56,6 @@ class DogCatStar:
     
     def open_homepage(self):
         logger.info(f"Opening homepage at {self.base_url}")
-        index_page = IndexPage(self._page)
+        page = self._context.new_page()
+        index_page = IndexPage(page)
         return index_page.goto()

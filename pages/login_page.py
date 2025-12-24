@@ -10,43 +10,60 @@ class LoginPage(BasePage):
         self.facebook_btn: Locator = self.page.locator(
             "button:text('使用 Facebook 帳號登入')"
         )
-        self.google_btn: Locator = self.page.locator("button:text('使用 Google 帳號登入')")
-        self.email_btn: Locator = self.page.locator("button:text('使用 Email 登入')")
+        self.google_btn: Locator = self.page.locator(
+            "button:text('使用 Google 帳號登入')"
+        )
+        self.email_btn: Locator = self.page.locator(
+            "button:text('使用 Email 登入'), button:text('使用 電子信箱 登入')"
+        )
         self.phone_national_code_dropdown: Locator = self.page.locator(
             "div.MuiBox-root > div.MuiFormControl-root"
         )
         self.phone_input: Locator = self.page.locator("input#billing_phone")
-        
-        
+        self.ask_login_div: Locator = self.page.locator(
+            "div:has(h6:has-text('登入享優惠')):has(button:text('立即登入'))"
+        )
+
         # email login process locators
-        self.email_login_container: Locator = self.page.locator("div:has(div>h4:text('使用 Email 登入'))")
-        self.email_banner: Locator = self.email_login_container.locator("p:text('Email')")
-        self.email_input: Locator = self.email_login_container.locator('input[name="email"]')
-        self.email_submit_btn: Locator = self.email_login_container.locator("button:has-text('確認')")
-        
-    def go_to_login(self):
-        if not self.is_in_current_page:
-            self.goto_path(self.path)
-        else:
-            return
-        
+        self.email_login_container: Locator = self.page.locator(
+            "div:has(div>h4:text('使用 Email 登入')), div:has(div>h4:text('使用 電子信箱 登入'))"
+        )
+        self.email_banner: Locator = self.email_login_container.locator(
+            "p:text('Email'), p:text('電子信箱')"
+        )
+        self.email_input: Locator = self.email_login_container.locator(
+            'input[name="email"]'
+        )
+        self.email_submit_btn: Locator = self.email_login_container.locator(
+            "button:text('確認')"
+        )
+
+        # otp password login process locators
+        self.otp_password_input: Locator = self.page.locator(
+            'form > input[autocomplete="one-time-code"]'
+        ).first
+
     def click_email_login(self):
+        expect(self.email_btn).to_be_visible()
+        expect(self.email_btn).to_be_enabled()
         self.email_btn.click()
-        
+
     def enter_email(self, email: str):
         self.email_banner.wait_for(timeout=5000)
         self.email_input.fill(email)
         expect(self.email_submit_btn).to_be_visible()
         expect(self.email_submit_btn).to_be_enabled()
         self.email_submit_btn.click()
-        
+
     def email_login(self, email: str):
-        self.go_to_login()
+        self.goto()
         self.click_email_login()
         self.enter_email(email)
-        input("完成 Email 登入後按 Enter")
-        
-        
-    
-        
-    
+
+    def enter_otp_password(self, otp_password: str):
+        self.otp_password_input.wait_for()
+        self.otp_password_input.fill(otp_password)
+        # TODO: wait for login to complete, use proper wait method
+
+        self.page.wait_for_load_state("load")
+        expect(self.ask_login_div).not_to_be_visible()

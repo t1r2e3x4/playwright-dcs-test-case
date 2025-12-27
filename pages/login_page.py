@@ -1,6 +1,6 @@
 from .base_page import BasePage
 from playwright.sync_api import Locator, expect
-
+import re
 
 class LoginPage(BasePage):
     def __init__(self, *args, **kwargs):
@@ -64,6 +64,8 @@ class LoginPage(BasePage):
         self.otp_password_input.wait_for()
         self.otp_password_input.fill(otp_password)
         # TODO: wait for login to complete, use proper wait method
-
-        self.page.wait_for_load_state("load")
+        self.page.wait_for_url(re.compile(r"/cosign/"))
+        self.page.wait_for_load_state("domcontentloaded")
+        self.page.wait_for_url(re.compile(r"/my-account"))
+        self.page.wait_for_load_state("domcontentloaded")
         expect(self.ask_login_div).not_to_be_visible()

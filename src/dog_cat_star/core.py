@@ -33,6 +33,7 @@ class DogCatStar:
             args=[
                 "--disable-blink-features=AutomationControlled",
                 "--ignore-certificate-errors",
+                "--start-maximized"
             ],
         )
 

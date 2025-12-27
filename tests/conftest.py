@@ -1,40 +1,25 @@
 import pytest
-from pages.login_page import LoginPage
-from pages.index_page import IndexPage
+from dotenv import load_dotenv
 from src.dog_cat_star import DogCatStar
 
-
-@pytest.fixture(scope="session")
-def dog_cat_star():
-    """
-    建立 DogCatStar instance，整個 session 共用
-    """
-    client = DogCatStar(browser="chrome")
-    yield client
-    client.close()
-
+# 自動載入環境變數
+@pytest.fixture(scope="session", autouse=True)
+def load_env():
+    load_dotenv()
 
 @pytest.fixture(scope="function")
-def page(dog_cat_star: DogCatStar):
-    """
-    每個 test function 都提供一個乾淨 page
-    """
-    page = dog_cat_star._context.new_page()
-    index_page = IndexPage(page)
-    index_page.goto()
-    yield page
-
+def dcs():
+    """初始化 DogCatStar 應用程式物件，並在測試後關閉"""
+    app = DogCatStar()
+    yield app
+    app.close()
 
 @pytest.fixture(scope="function")
-def logged_in_page(dog_cat_star: DogCatStar):
+def page(dcs):
     """
-    每個 test 用 storage_state 建立已登入 page
+    從 dcs 實例中取得一個新的 page。
+    假設 dcs._context 已經初始化。
     """
-    context = dog_cat_star._browser.new_context(
-        storage_state="./state_storage/state.json"
-    )
-    page = context.new_page()
-    index_page = IndexPage(page)
-    index_page.goto()
-    yield page
-    context.close()
+    new_page = dcs._context.new_page()
+    yield new_page
+    new_page.close()

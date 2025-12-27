@@ -1,12 +1,13 @@
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from pages.login_page import LoginPage
 from src.dog_cat_star import DogCatStar
 from helper.mail_otp.mail_otp import get_latest_otp_email
 from dotenv import load_dotenv
 import os
 import time
+import pytest
 
 def test_email_login(page):
-    load_dotenv()
     EMAIL_ADDRESS = os.getenv("EMAIL_IMAP_USERNAME")
     login_page = LoginPage(page)
     login_page.goto()
@@ -25,3 +26,13 @@ def test_email_login(page):
         print("OTP email not found yet, retrying...")
         
     login_page.enter_otp_password(otp_pass)
+    
+def test_email_login_fake_otp(page):
+    EMAIL_ADDRESS = os.getenv("EMAIL_IMAP_USERNAME")
+    login_page = LoginPage(page)
+    login_page.goto()
+    login_page.email_login(EMAIL_ADDRESS)
+    
+    with pytest.raises(PlaywrightTimeoutError):
+        login_page.enter_otp_password("123456")
+    

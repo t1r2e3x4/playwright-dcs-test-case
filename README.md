@@ -20,7 +20,13 @@ python3 -m pip install -r requirement.txt
 python3 -m playwright install
 ```
 
-4) 執行所有 pytest 測試
+4) 依照 .env.example 新增 .env 檔案，主要是用在自動使用 email 登入，並在初次執行的時候跑過 state_saver.py
+
+```bash
+python3 state_saver.py
+```
+
+5) 執行所有 pytest 測試
 
 ```bash
 pytest -q
@@ -62,13 +68,146 @@ pytest -q
 | 購物車數量即時更新     | 加入商品後購物車 icon 顯示正確數量 |
 | 登入成功後頁面元素正確顯示 | 顯示會員名稱、登出按鈕、購物車數量    |
 
+## API
+### 登入相關 API 
+#### 
+```
+Method: GET
+Path: /cosign/token_login_page
+Parameters: token
+Usage: use for login verify token
+```
+
+ 情境       | 參數         | 預期結果        |
+ ----------- | ------------- | ----------- |
+ 正常 token | 合法 JWT        | Request 被接受 |
+ 缺少 token | 無             | Request 被拒  |
+ 空 token  | `token=`      | Request 被拒  |
+ 非 JWT 格式 | `abc123`      | Request 被拒  |
+ 非字串      | `token=12345` | Request 被拒  |
+
+```
+Method: POST
+Path: /api/platform-sdk/otp-verification
+Parameters: 
+  - Header: x-platform-token
+  - Body: account, otpCode, purpose
+Usage: verify OTP code for login (SMS-based authentication)
+Body json:
+{
+  "account": "+886936727490",
+  "otpCode": "234222",
+  "purpose": "login"
+}
+
+```
+
+| 情境          | 參數合                                                           | 預期結果        |
+| ----------- | -------------------------------------------------------------- | ----------- |
+| 正常請求        | 合法 `x-platform-token` + 正確 `account / otpCode / purpose=login` | Request 被接受 |
+| 缺少平台 token  | 無 `x-platform-token`                                           | Request 被拒  |
+| OTP 格式錯誤    | `otpCode=123`（長度不足）                                            | Request 被拒  |
+| 帳號與 OTP 不匹配 | 正確格式 OTP + 錯誤 `account`                                        | Request 被拒  |
+| 不支援用途       | `purpose=register`                                             | Request 被拒  |
+
+```
+Method: POST
+Path: /api/platform-sdk/otp
+Parameters:
+  - Header: x-platform-token
+  - Body: account, countryCode, otpTemplateSettingKey, recaptchaToken,
+          type, redirectUrl, fallbackUrl, purpose, validateUrl
+Usage: request OTP (SMS) for login or authentication
+Body json: 
+{
+  "account": "+886936727490",
+  "countryCode": "TW",
+  "otpTemplateSettingKey": "TW_zh_TW",
+  "recaptchaToken": "<recaptcha_token>",
+  "type": "sms",
+  "purpose": "login",
+  "redirectUrl": "https://www.dogcatstar.com/product/respiratory-health/?no-cache=",
+  "fallbackUrl": "https://www.dogcatstar.com/product/respiratory-health/?no-cache=",
+  "validateUrl": "https://www.dogcatstar.com/my-account/?validate=registerOrLogin"
+}
+
+```
+| 情境           | 參數                                                                    | 預期結果        |
+| ------------ | --------------------------------------------------------------------- | ----------- |
+| 正常請求         | 合法 `x-platform-token` + 正確 `account / recaptchaToken / purpose=login` | Request 被接受 |
+| 缺少平台 token   | 無 `x-platform-token`                                                  | Request 被拒  |
+| 缺少帳號         | 無 `account`                                                           | Request 被拒  |
+| reCAPTCHA 無效 | `recaptchaToken` 為過期或錯誤值                                              | Request 被拒  |
+| 不支援用途        | `purpose=register`（非預期值）                                              | Request 被拒  |
+
+
+### 購物車相關 API
+####
+```
+Method: POST
+Path: /api/ec/v2/TW/cart/calculate
+Parameters (Body JSON):
+- billing_country
+- project_code
+- country_code
+- order_items
+- manual_input_coupon_ids
+- applied_shipping_method_id
+- language
+- cart_values
+Usage: calculate cart price, shipping, promotion, and payment summary
+```
+| 情境                               | 參數                                  | 預期結果             |
+| -------------------------------- | ----------------------------------- | ---------------- |
+| 正常請求                             | 所有必填欄位皆存在且格式正確                      | Request 被接受（200） |
+| 缺少 `order_items`                 | `order_items` 不存在                   | Request 被拒（400）  |
+| `order_items` 為空陣列               | `order_items: []`                   | Request 被拒（400）  |
+| `quantity` 為 0 或 負數                  | `order_items[0].quantity = 0`       | Request 被拒（400）  |
+| `applied_shipping_method_id` 非數字 | `"applied_shipping_method_id": "2"` | Request 被拒（400）  |
+
+
+```
+Method: POST
+Path: /api/events
+Parameters (Body JSON):
+- event
+Usage: collect frontend behavior events for analytics / tracking
+Body json:
+{
+  "event": {
+    "app_env": "production",
+    "event_name": "add_to_cart",
+    "project_code": "DCS",
+    "country_code": "TW",
+    "event_id": "uuid",
+    "ga_client_id": "string",
+    "event_info": {
+      "status_code": "001",
+      "status_message": "ATC Success",
+      "currency": "TWD",
+      "value": null,
+      "items": [ ... ],
+      "session_id": "string",
+      "document_title": "string",
+      "document_location": "url"
+    }
+  }
+}
+```
+| 情境                | 參數                      | 預期結果                   |
+| ----------------- | ----------------------- | ---------------------- |
+| 正常事件送出            | event 結構完整且格式正確         | Request 被接受（200 / 204） |
+| 缺少 `event`        | body 無 `event` key      | Request 被拒（400）        |
+| 缺少 `event_name`   | `event.event_name` 不存在  | Request 被拒（400）        |
+| `event_id` 非 UUID | `event_id = "12345"`    | Request 被拒（400）        |
+| `items` 非陣列       | `event_info.items = {}` | Request 被拒（400）        |
+
 
 ## TODO:
 - [ ] (product_page_helper.py) 有時候按太快會沒反應，暫時用 wait_for_load_state 解決，感覺是在等 API 回應？
 - [ ] (mailotp.py) 根據實際 OTP 格式調整正則表達式，目前只是假設 OTP 是 6 位數字
 - [ ] (login_page.py) 目前自動登入後判斷已經登入的等待策略不好，應該改進
 - [ ] 目前網頁跳轉都是直接用網址，完整 E2E 應該也要有按鈕連結跳轉
--
 
 
 
